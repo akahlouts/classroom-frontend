@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTable } from "@refinedev/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 
 import { Search } from "lucide-react";
 
@@ -17,9 +18,8 @@ import { CreateButton } from "@/components/refine-ui/buttons/create";
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { Badge } from "@/components/ui/badge";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { DEPARTMENT_OPTIONS } from "@/constants";
 import { Subject } from "@/types";
-import { DEPARTMENTS_OPTIONS } from "@/constants";
 
 const SubjectsList = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,7 +61,7 @@ const SubjectsList = () => {
         },
         {
           id: "department",
-          accessorKey: "department",
+          accessorKey: "department.name",
           size: 150,
           header: () => <p className="column-title">Department</p>,
           cell: ({ getValue }) => (
@@ -128,7 +128,7 @@ const SubjectsList = () => {
 
               <SelectContent>
                 <SelectItem value="all">All Departments</SelectItem>
-                {DEPARTMENTS_OPTIONS.map((department) => (
+                {DEPARTMENT_OPTIONS.map((department) => (
                   <SelectItem key={department.value} value={department.value}>
                     {department.label}
                   </SelectItem>
